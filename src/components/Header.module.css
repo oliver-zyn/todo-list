@@ -1,0 +1,12 @@
+.header {
+  background: var(--gray-700);
+}
+
+.header > div {
+  max-width: 736px;
+  height: 12.5rem;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

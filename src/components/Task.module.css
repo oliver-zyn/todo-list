@@ -1,0 +1,90 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  background: var(--gray-500);
+  padding: 1rem;
+  border: 1px solid var(--gray-400);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  gap: 0.75rem;
+}
+
+.task > div {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.task p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.checkmarkContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmarkContainer {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkmark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.1rem;
+  width: 1.1rem;
+  padding: 0.1rem;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  transition: background-color .1s;
+}
+
+.checkmarkContainer input:checked ~ .checkmark {
+  background-color: var(--purple-dark);
+  border: 0;
+}
+
+.checkmark svg {
+  display: none;
+}
+
+.checkmarkContainer input:checked ~ .checkmark svg {
+  display: block;
+}
+
+.deleteButton {
+  background: transparent;
+  border: 0;
+  color: var(--gray-300);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.3rem 0.3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteButton:hover {
+  background: var(--gray-400);
+  color: var(--danger);
+}
+
+.taskChecked {
+  box-shadow: none;
+  border: 1px solid var(--gray-500);
+}
+
+.taskChecked p {
+  text-decoration: line-through;
+  color: var(--gray-300);
+}

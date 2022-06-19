@@ -1,7 +1,12 @@
-function App() {
+import { Header } from './components/Header'
+import { Tasks } from './components/Tasks'
+import './global.css'
+
+export function App() {
   return (
-    <h1>Hello World</h1>
+    <div>
+      <Header />
+      <Tasks />
+    </div>
   )
 }
-
-export default App
