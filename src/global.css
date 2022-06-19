@@ -1,18 +1,18 @@
 :root {
-  --danger: #E25858;
+  --danger: #e25858;
 
-  --purple: #8284FA;
-  --purple-dark: #5E60CE;
+  --purple: #8284fa;
+  --purple-dark: #5e60ce;
 
-  --blue: #4EA8DE;
-  --blue-dark: #1E6F9F;
+  --blue: #4ea8de;
+  --blue-dark: #1e6f9f;
 
-  --gray-100: #F2F2F2;
+  --gray-100: #f2f2f2;
   --gray-300: #808080;
   --gray-400: #333333;
   --gray-500: #262626;
-  --gray-600: #1A1A1A;
-  --gray-700: #0D0D0D;
+  --gray-600: #1a1a1a;
+  --gray-700: #0d0d0d;
 }
 
 * {
@@ -27,8 +27,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body, input, textarea, button {
-  font-family: 'Inter', sans-serif;
+body,
+input,
+textarea,
+button {
+  font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 1rem;
 }
@@ -40,4 +43,10 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   background-color: var(--gray-400);
   border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%;
+  }
 }

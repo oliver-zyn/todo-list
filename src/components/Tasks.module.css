@@ -1,5 +1,6 @@
 .tasks {
-  max-width: 736px;
+  max-width: calc(736px - 1rem);
+  padding: 0 1rem;
   margin: -1.6rem auto auto;
 }
 
@@ -42,11 +43,16 @@
   font-weight: 700;
   font-size: 0.875rem;
 
-  transition: background-color .1s;
+  transition: background-color 0.1s, opacity 0.1s;
 }
 
-.addButton:hover {
+.addButton:not(:disabled):hover {
   background: var(--blue);
+}
+
+.addButton:disabled:hover {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .addButton:focus {
@@ -80,7 +86,7 @@
 .listTasks header div span {
   background: var(--gray-400);
   padding: 0.125rem 0.5rem;
-  border-radius: 50%;
+  border-radius: 50px;
 }
 
 .listTasks > div {

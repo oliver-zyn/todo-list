@@ -1,33 +1,37 @@
-import { Check, Trash } from 'phosphor-react';
-import { useState } from 'react';
+import { Check, Trash } from "phosphor-react";
 
-import { TaskType } from './Tasks';
+import { TaskType } from "./Tasks";
 
-import styles from './Task.module.css';
+import styles from "./Task.module.css";
 
 interface TaskProps {
-  task: TaskType
+  task: TaskType;
   onCompleteTask: (id: number) => void;
   onDeleteTask: (id: number) => void;
 }
 
-export function Task({task, onCompleteTask, onDeleteTask }: TaskProps) {
+export function Task({ task, onCompleteTask, onDeleteTask }: TaskProps) {
   return (
-    <div className={[styles.task, task.isCompleted ? styles.taskChecked : ''].join(' ')}>
+    <div
+      className={[styles.task, task.isCompleted ? styles.taskChecked : ""].join(
+        " "
+      )}
+    >
       <div>
         <label className={styles.checkmarkContainer}>
-            <input type="checkbox" onChange={() => onCompleteTask(task.id)} />
-            <div className={styles.checkmark}>
-              <Check weight="bold" />
-            </div>
+          <input type="checkbox" onChange={() => onCompleteTask(task.id)} />
+          <div className={styles.checkmark}>
+            <Check weight="bold" />
+          </div>
         </label>
-        <p>
-          {task.description}
-        </p>
+        <p>{task.description}</p>
       </div>
-      <button className={styles.deleteButton} onClick={() => onDeleteTask(task.id)}>
+      <button
+        className={styles.deleteButton}
+        onClick={() => onDeleteTask(task.id)}
+      >
         <Trash size={19} />
       </button>
     </div>
-  )
+  );
 }

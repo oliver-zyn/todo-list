@@ -1,0 +1,14 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--gray-300);
+  line-height: 1.6;
+  margin-top: 2.5rem;
+}
+
+.message > div {
+  margin-bottom: 1rem;
+}

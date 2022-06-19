@@ -1,5 +1,7 @@
-import { PlusCircle } from "phosphor-react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+
+import { PlusCircle } from "phosphor-react";
+import { EmptyMessage } from "./EmptyMessage";
 import { Task } from "./Task";
 
 import styles from "./Tasks.module.css";
@@ -12,11 +14,18 @@ export interface TaskType {
 
 export function Tasks() {
   const [tasks, setTasks] = useState<TaskType[]>([]);
-  const [taskDescription, setTaskDescription] = useState("");
+  const [newTaskDescription, setNewTaskDescription] = useState("");
   const [scoreTasks, setScoreTasks] = useState(0);
+  const [scoreCompletedTasks, setScoreCompletedTasks] = useState(0);
 
   useEffect(() => {
     setScoreTasks(tasks.length);
+
+    const completedTasks = tasks.filter((task) => {
+      return task.isCompleted === true;
+    });
+
+    setScoreCompletedTasks(completedTasks.length);
   }, [tasks]);
 
   function handleCreateTask(e: FormEvent) {
@@ -24,13 +33,18 @@ export function Tasks() {
 
     const newTask = {
       id: Math.floor(1000 * Math.random()),
-      description: taskDescription,
+      description: newTaskDescription,
       isCompleted: false,
     };
 
     setTasks((state) => {
       return [...state, newTask];
     });
+    setNewTaskDescription("");
+  }
+
+  function handleNewTaskChange(e: ChangeEvent<HTMLInputElement>) {
+    setNewTaskDescription(e.target.value);
   }
 
   function deleteTask(id: number) {
@@ -42,23 +56,17 @@ export function Tasks() {
   }
 
   function completeTask(id: number) {
-    const newTasks = tasks.filter((task) => {
+    const newTasks = tasks.map((task) => {
       if (task.id === id) {
-        return task.isCompleted = !task.isCompleted
-      } else {
-        return task
+        task.isCompleted = !task.isCompleted;
       }
+      return task;
     });
 
-    console.log(newTasks);
-    
-
-    setTasks(newTasks)
+    setTasks(newTasks);
   }
 
-  function handleNewTaskChange(e: ChangeEvent<HTMLInputElement>) {
-    setTaskDescription(e.target.value);
-  }
+  const isNewTaskEmpty = newTaskDescription.length === 0;
 
   return (
     <section className={styles.tasks}>
@@ -67,8 +75,14 @@ export function Tasks() {
           type="text"
           placeholder="Adicione uma nova tarefa"
           onChange={handleNewTaskChange}
+          value={newTaskDescription}
+          required
         />
-        <button type="submit" className={styles.addButton}>
+        <button
+          type="submit"
+          className={styles.addButton}
+          disabled={isNewTaskEmpty}
+        >
           Criar <PlusCircle size={19} weight="bold" />
         </button>
       </form>
@@ -78,20 +92,27 @@ export function Tasks() {
             Tarefas Criadas <span>{scoreTasks}</span>
           </div>
           <div>
-            Concluídas <span>0</span>
+            Concluídas{" "}
+            <span>
+              {scoreCompletedTasks} de {scoreTasks}
+            </span>
           </div>
         </header>
         <div>
-          {tasks.map((task) => {
-            return (
-              <Task
-                key={task.id}
-                task={task}
-                onCompleteTask={completeTask}
-                onDeleteTask={deleteTask}
-              />
-            );
-          })}
+          {tasks.length === 0 ? (
+            <EmptyMessage />
+          ) : (
+            tasks.map((task) => {
+              return (
+                <Task
+                  key={task.id}
+                  task={task}
+                  onCompleteTask={completeTask}
+                  onDeleteTask={deleteTask}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </section>

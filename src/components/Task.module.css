@@ -45,7 +45,7 @@
   padding: 0.1rem;
   border-radius: 50%;
   border: 2px solid var(--blue);
-  transition: background-color .1s;
+  transition: background-color 0.1s;
 }
 
 .checkmarkContainer input:checked ~ .checkmark {
